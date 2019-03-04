@@ -1,0 +1,10 @@
+node_modules
+yarn-error.log
+.idea/*
+*.js.map
+*.js
+test.log
+*.iml
+*.d.ts
+
+config/local.yml

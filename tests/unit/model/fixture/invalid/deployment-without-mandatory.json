@@ -1,0 +1,7 @@
+{
+  "releaseTag": "release-V1.2.3",
+  "environment": "staging",
+  "region": "eu-west-1",
+  "applicationName": "dashbord-service",
+  "timestamp": "2019-03-04"
+}
