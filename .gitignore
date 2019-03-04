@@ -1,0 +1,9 @@
+node_modules
+yarn-error.log
+.idea/*
+*.js.map
+*.js
+test.log
+*.iml
+
+config/local.yml
