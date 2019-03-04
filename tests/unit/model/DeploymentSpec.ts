@@ -16,7 +16,7 @@ export class DeploymentSpec {
   }
 
   @test 'empty Deployments'() {
-    this.assertDeploymentFixture({}, 5);
+    this.assertDeploymentFixture({}, 6);
   }
 
   @test 'valid deployments with all fields'() {

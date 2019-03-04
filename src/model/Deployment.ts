@@ -15,14 +15,14 @@ export class Deployment {
   applicationName: string;
 
   @IsNotEmpty()
+  region: string;
+
+  @IsNotEmpty()
   @IsFridgeISO8601WithoutMs()
   timestamp: string;
 
   @IsOptional()
   cloudProvider: string;
-
-  @IsOptional()
-  region?: string;
 
   @IsOptional()
   configurationData?: object;
