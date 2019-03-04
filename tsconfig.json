@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "declaration": true,
     "allowSyntheticDefaultImports": true,
     "module": "commonjs",
     "removeComments": true,
@@ -8,13 +9,9 @@
     "noUnusedLocals": true,
     "moduleResolution": "node",
     "target": "ES6",
-    "lib": ["es2017", "dom", "esnext.asynciterable"],
-    "sourceMap": true,
-    "baseUrl": "./"
+    "sourceMap": true
   },
   "exclude": [
-    "node_modules",
-    "config-cli",
-    "dist"
+    "node_modules"
   ]
 }
