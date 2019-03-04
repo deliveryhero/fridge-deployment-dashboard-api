@@ -7,10 +7,9 @@
     "experimentalDecorators": true,
     "noUnusedLocals": true,
     "moduleResolution": "node",
-    "target": "es2017",
+    "target": "ES6",
     "lib": ["es2017", "dom", "esnext.asynciterable"],
     "sourceMap": true,
-    "outDir": "./dist",
     "baseUrl": "./"
   },
   "exclude": [
