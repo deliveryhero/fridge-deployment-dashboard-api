@@ -1,0 +1,308 @@
+{
+	"basePath": "/v1",
+	"definitions": {
+		"ErrorResponse": {
+			"description": "",
+			"properties": {
+				"timestamp": {
+					"type": "string",
+					"description": ""
+				},
+				"message": {
+					"type": "string",
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"timestamp",
+				"message"
+			]
+		},
+		"Deployment": {
+			"description": "",
+			"properties": {
+				"teamName": {
+					"type": "string",
+					"description": ""
+				},
+				"releaseTag": {
+					"type": "string",
+					"description": ""
+				},
+				"environment": {
+					"type": "string",
+					"description": ""
+				},
+				"applicationName": {
+					"type": "string",
+					"description": ""
+				},
+				"region": {
+					"type": "string",
+					"description": ""
+				},
+				"timestamp": {
+					"type": "string",
+					"description": ""
+				},
+				"cloudProvider": {
+					"type": "string",
+					"description": ""
+				},
+				"configurationData": {
+					"type": "object",
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"teamName",
+				"releaseTag",
+				"environment",
+				"applicationName",
+				"region",
+				"timestamp",
+				"cloudProvider"
+			]
+		},
+		"Environment": {
+			"description": "",
+			"properties": {
+				"environment_name": {
+					"type": "string",
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"environment_name"
+			]
+		},
+		"ListEnvironmentsResponse": {
+			"description": "",
+			"properties": {
+				"environments": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/Environment"
+					},
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"environments"
+			]
+		},
+		"ListDeploymentsResponse": {
+			"description": "",
+			"properties": {
+				"applicationName": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/Deployment"
+					},
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"applicationName"
+			]
+		}
+	},
+	"info": {
+		"description": "description",
+		"license": {
+			"name": "MIT"
+		},
+		"title": "Deployment Dashboard API",
+		"version": "0.0.0"
+	},
+	"paths": {
+		"/deployments": {
+			"post": {
+				"operationId": "DeploymentsAddDeployment",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"204": {
+						"description": ""
+					},
+					"400": {
+						"description": "",
+						"schema": {
+							"$ref": "#/definitions/ErrorResponse"
+						}
+					},
+					"401": {
+						"description": "",
+						"schema": {
+							"$ref": "#/definitions/ErrorResponse"
+						}
+					},
+					"500": {
+						"description": "",
+						"schema": {
+							"$ref": "#/definitions/ErrorResponse"
+						}
+					}
+				},
+				"description": "",
+				"summary": "Insert a new deployment",
+				"tags": [
+					"deployments"
+				],
+				"security": [
+					{
+						"bearer": []
+					}
+				],
+				"consumes": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"description": "",
+						"in": "body",
+						"name": "_deployment",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/Deployment"
+						}
+					}
+				]
+			}
+		},
+		"/deployments/{teamName}": {
+			"get": {
+				"operationId": "DeploymentsListEnvironments",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "",
+						"schema": {
+							"$ref": "#/definitions/ListEnvironmentsResponse"
+						}
+					},
+					"400": {
+						"description": "",
+						"schema": {
+							"$ref": "#/definitions/ErrorResponse"
+						}
+					},
+					"401": {
+						"description": "",
+						"schema": {
+							"$ref": "#/definitions/ErrorResponse"
+						}
+					},
+					"500": {
+						"description": "",
+						"schema": {
+							"$ref": "#/definitions/ErrorResponse"
+						}
+					}
+				},
+				"description": "",
+				"summary": "List all environments for each team",
+				"tags": [
+					"list-environments-response"
+				],
+				"security": [
+					{
+						"bearer": []
+					}
+				],
+				"consumes": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"description": "",
+						"in": "path",
+						"name": "teamName",
+						"required": true,
+						"type": "string"
+					}
+				]
+			}
+		},
+		"/deployments/{teamName}/{environmentName}": {
+			"get": {
+				"operationId": "DeploymentsListDeploymentsResponse",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "",
+						"schema": {
+							"$ref": "#/definitions/ListDeploymentsResponse"
+						}
+					},
+					"400": {
+						"description": "",
+						"schema": {
+							"$ref": "#/definitions/ErrorResponse"
+						}
+					},
+					"401": {
+						"description": "",
+						"schema": {
+							"$ref": "#/definitions/ErrorResponse"
+						}
+					},
+					"500": {
+						"description": "",
+						"schema": {
+							"$ref": "#/definitions/ErrorResponse"
+						}
+					}
+				},
+				"description": "",
+				"summary": "List all deployments for each application under team environment",
+				"tags": [
+					"list-deployments-response"
+				],
+				"security": [
+					{
+						"bearer": []
+					}
+				],
+				"consumes": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"description": "",
+						"in": "path",
+						"name": "teamName",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"description": "",
+						"in": "path",
+						"name": "environmentName",
+						"required": true,
+						"type": "string"
+					}
+				]
+			}
+		}
+	},
+	"swagger": "2.0",
+	"securityDefinitions": {
+		"bearer": {
+			"type": "apiKey",
+			"name": "Authorization",
+			"in": "header",
+			"description": "JWT is expected. <br> The content of the header should look like the following: 'Authorization: 'Bearer <token>'.<br>T"
+		}
+	}
+}

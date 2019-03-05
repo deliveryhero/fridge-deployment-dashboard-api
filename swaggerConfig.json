@@ -1,0 +1,16 @@
+{
+  "swagger": {
+    "name": "Deployment Dashboard API",
+    "basePath": "/v1",
+    "securityDefinitions": {
+      "bearer": {
+        "type": "apiKey",
+        "name": "Authorization",
+        "in": "header",
+        "description": "JWT is expected. <br> The content of the header should look like the following: 'Authorization: 'Bearer <token>'.<br>T"
+      }
+    },
+    "outputDirectory": "./swagger/dist",
+    "entryFile": "./swagger/api.ts"
+  }
+}
