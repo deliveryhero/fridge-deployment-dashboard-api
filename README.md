@@ -1,3 +1,9 @@
-##Deploy the stack 
+## Create a local project
+- copy local.dist.yml to local.yml
+- open local.yml and change %stage-name% to your name (alexandrov for instance)
 
-AWS_PROFILE=dh-fridge-stg AWS_REGION=eu-west-1 yarn serverless deploy 
+##  Deploy the stack 
+`yarn tsc && AWS_PROFILE=dh-fridge-stg AWS_REGION=eu-west-1 yarn serverless deploy` 
+
+## Local/offline development
+`yarn tsc && AWS_PROFILE=dh-fridge-stg AWS_REGION=eu-west-1 yarn serverless offline -c`
