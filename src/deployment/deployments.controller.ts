@@ -1,8 +1,9 @@
-import {Controller, Get, Post} from '@nestjs/common';
+import {Controller, Get, HttpCode, HttpStatus, Post} from '@nestjs/common';
 
 @Controller('/v1/deployments')
 export class DeploymentsController {
   @Post()
+  @HttpCode(HttpStatus.CREATED)
   addDeployment() {
     return 'This action adds a deployment';
   }
