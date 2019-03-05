@@ -1,5 +1,7 @@
 import {Deployment} from '../model/Deployment';
 
+export class RepositoryError extends Error {}
+
 export interface IDeploymentsRepository {
   addDeployment(deployment: Deployment): Promise<void>;
 

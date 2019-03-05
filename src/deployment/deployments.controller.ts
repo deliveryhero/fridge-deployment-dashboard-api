@@ -1,11 +1,16 @@
-import {Controller, Get, HttpCode, HttpStatus, Post} from '@nestjs/common';
+import {Controller, Get, HttpCode, HttpStatus, Post, Req} from '@nestjs/common';
+import {DynamoDBDeploymentsRepository} from '../repository/dynamodb/DynamoDBDeploymentsRepository';
 
 @Controller('/v1/deployments')
 export class DeploymentsController {
+  constructor(
+    private readonly repository: DynamoDBDeploymentsRepository
+  ) {}
+
   @Post()
   @HttpCode(HttpStatus.CREATED)
-  addDeployment() {
-    return 'This action adds a deployment';
+  addDeployment(@Req() request) {
+    return this.repository.addDeployment(request.body as any);// @todo No validation, no request DTO etc
   }
 
   @Get('/:teamName')

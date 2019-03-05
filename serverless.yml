@@ -17,7 +17,7 @@ provider:
     STAGE: ${self:provider.stage}
     NODE_ENV: ${self:custom.env.parameters.node_env}
     DYNAMODB_ENDPOINT: ${self:custom.env.parameters.aws.dynamoDb.endpoint}
-    DEPLOYMENT_TABLE_NAME: ${self:custom.table.deployment}
+    DEPLOYMENTS_TABLE_NAME: ${self:custom.table.deployment}
 
   apiKeys:
     - ${self:service}-${self:provider.stage}-apiKey
@@ -54,14 +54,14 @@ custom:
 
 functions:
   addDeployment:
-    handler: dist/httpHandler.handle
+    handler: httpHandler.handle
     events:
       - http:
-          path: /v1/deployments/{teamName}
+          path: /v1/deployments
           method: post
           cors: true
   getDeployments:
-    handler: dist/httpHandler.handle
+    handler: httpHandler.handle
     events:
       - http:
           path: /v1/deployments/{teamName}/{environmentName}
