@@ -28,6 +28,7 @@ provider:
         - "dynamodb:Get*"
         - "dynamodb:Query"
         - "dynamodb:Scan"
+        - "dynamodb:PutItem"
       Resource:
         - Fn::Join:
             - ""
@@ -39,7 +40,7 @@ provider:
 package:
   exclude:
     - .git/**
-    - test/**
+    - tests/**
     - src/**
 
 custom:
@@ -56,18 +57,16 @@ functions:
     handler: dist/httpHandler.handle
     events:
       - http:
-          path: /v1/deployments/
+          path: /v1/deployments/{teamName}
           method: post
           cors: true
-          private: true
   getDeployments:
     handler: dist/httpHandler.handle
     events:
       - http:
-          path: /v1/deployments/{env}
+          path: /v1/deployments/{teamName}/{environmentName}
           method: get
           cors: true
-          private: true
 
 resources:
   Resources:
@@ -87,6 +86,6 @@ resources:
             KeyType: "HASH"
           -
             AttributeName: "SK"
-            KeyType: "HASH"
+            KeyType: "RANGE"
         BillingMode: PAY_PER_REQUEST
         TableName: "${self:custom.table.deployment}"

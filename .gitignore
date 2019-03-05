@@ -8,3 +8,4 @@ test.log
 *.d.ts
 
 config/local.yml
+environments/local.yml

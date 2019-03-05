@@ -1,4 +1,4 @@
-stage: alexandrov
+stage: %stage-name%
 parameters:
   node_env: dev
   aws:
