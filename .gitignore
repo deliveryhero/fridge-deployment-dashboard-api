@@ -9,3 +9,5 @@ test.log
 
 config/local.yml
 environments/local.yml
+
+.serverless

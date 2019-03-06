@@ -33,7 +33,6 @@ provider:
         - Fn::Join:
             - ""
             - - "arn:aws:dynamodb:${self:provider.region}:"
-              - "Ref" : "AWS::AccountId"
               - ":table/"
               - "Ref" : "DeploymentTable"
               - "*"
