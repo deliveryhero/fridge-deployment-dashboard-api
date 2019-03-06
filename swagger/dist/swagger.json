@@ -97,19 +97,8 @@
 		},
 		"ListDeploymentsResponse": {
 			"description": "",
-			"properties": {
-				"applicationName": {
-					"type": "array",
-					"items": {
-						"$ref": "#/definitions/Deployment"
-					},
-					"description": ""
-				}
-			},
-			"type": "object",
-			"required": [
-				"applicationName"
-			]
+			"properties": {},
+			"type": "object"
 		}
 	},
 	"info": {

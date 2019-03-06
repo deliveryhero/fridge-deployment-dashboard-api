@@ -7,7 +7,5 @@ export interface IDeploymentsRepository {
 
   listEnvironments(teamName: string): Promise<string[]>;
 
-  listApplications(teamName: string, environmentName: string): Promise<string[]>;
-
-  listDeployments(teamName: string, environmentName: string, applicationName: string): Promise<Deployment[]>;
+  listDeployments(teamName: string, environmentName: string): Promise<Deployment[]>;
 }

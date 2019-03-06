@@ -71,15 +71,8 @@ definitions:
             - environments
     ListDeploymentsResponse:
         description: ""
-        properties:
-            applicationName:
-                type: array
-                items:
-                    $ref: '#/definitions/Deployment'
-                description: ""
+        properties: {}
         type: object
-        required:
-            - applicationName
 info:
     description: description
     license:

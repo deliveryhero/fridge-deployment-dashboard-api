@@ -7,9 +7,10 @@ import {ApplicationConfig} from '../../application-configuration';
 @Injectable()
 export class DynamoDBDeploymentsRepository implements IDeploymentsRepository {
   constructor(
-    private readonly dbDocumentClient: AWS.DynamoDB.DocumentClient,
-    private readonly config: ApplicationConfig,
-  ) {}
+      private readonly dbDocumentClient: AWS.DynamoDB.DocumentClient,
+      private readonly config: ApplicationConfig,
+  ) {
+  }
 
   async addDeployment(deployment: Deployment): Promise<void> {
     try {
@@ -38,19 +39,50 @@ export class DynamoDBDeploymentsRepository implements IDeploymentsRepository {
     }
   }
 
-  async listApplications(teamName: string, environmentName: string): Promise<string[]> {
-    // TODO: list applications for team under one environments
-    return undefined;
+  async listDeployments(teamName: string, environmentName: string): Promise<Deployment[]> {
+    const envs = await this.listEnvironments(teamName);
+    if (!envs || !envs.length) {
+      return [];
+    }
+    const teamNameEnv = `${teamName}_${envs[0]}`;
+    const params: AWS.DynamoDB.Types.DocumentClient.QueryInput = {
+      KeyConditionExpression: '#PK = :PK',
+      ExpressionAttributeNames: {
+        '#PK': 'PK'
+      },
+      ExpressionAttributeValues: {
+        ':PK': teamNameEnv
+      },
+      TableName: this.config.aws.dynamoDB.tables.deployments.tableName,
+      ScanIndexForward: false,
+      ConsistentRead: true
+    };
+    const data: AWS.DynamoDB.DocumentClient.QueryOutput = await this.dbDocumentClient.query(params).promise();
+    return data.Items.map(item => {
+      return item['deployment'];
+    });
   }
 
-  listDeployments(teamName: string, environmentName: string, applicationName: string): Promise<Deployment[]> {
-    // TODO: list Deployments for one application
-    return undefined;
-  }
-
-  listEnvironments(teamName: string): Promise<string[]> {
-    // TODO: list Environments which team has
-    return undefined;
+  async listEnvironments(teamName: string): Promise<string[]> {
+    const params: AWS.DynamoDB.Types.DocumentClient.QueryInput = {
+      KeyConditionExpression: '#PK = :PK',
+      ExpressionAttributeNames: {
+        '#PK': 'PK'
+      },
+      ExpressionAttributeValues: {
+        ':PK': teamName
+      },
+      TableName: this.config.aws.dynamoDB.tables.deployments.tableName,
+      ScanIndexForward: false,
+      ConsistentRead: true
+    };
+    const data: AWS.DynamoDB.DocumentClient.QueryOutput = await this.dbDocumentClient.query(params).promise();
+    if (!data || !data.Items || data.Items.length < 1) {
+      return [];
+    }
+    return data.Items.map(item => {
+      return item['SK'];
+    });
   }
 
 }

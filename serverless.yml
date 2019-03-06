@@ -9,7 +9,7 @@ plugins:
 provider:
   name: aws
   runtime: nodejs8.10
-  timeout: 5
+  timeout: 1
   stage: ${opt:stage, self:custom.env.stage}
   region: ${self:custom.env.parameters.aws.region}
 
@@ -33,6 +33,7 @@ provider:
         - Fn::Join:
             - ""
             - - "arn:aws:dynamodb:${self:provider.region}:"
+              - "Ref" : "AWS::AccountId"
               - ":table/"
               - "Ref" : "DeploymentTable"
               - "*"
@@ -58,6 +59,13 @@ functions:
       - http:
           path: /v1/deployments
           method: post
+          cors: true
+  getEnvironments:
+    handler: httpHandler.handle
+    events:
+      - http:
+          path: /v1/deployments/{teamName}
+          method: get
           cors: true
   getDeployments:
     handler: httpHandler.handle
