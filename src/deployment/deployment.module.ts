@@ -22,7 +22,7 @@ import * as AWS from 'aws-sdk';
         apiVersion: '2012-08-10',
         endpoint: config.aws.dynamoDB.endpoint,
         region: config.aws.region,
-        convertEmptyValues: true,
+        convertEmptyValues: true
       }),
     },
   ],

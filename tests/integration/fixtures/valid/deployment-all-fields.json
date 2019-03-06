@@ -1,0 +1,14 @@
+{
+  "deployment": {
+    "teamName": "data-fridge",
+    "releaseTag": "release-V1.2.3",
+    "environment": "staging",
+    "region": "eu-west-1",
+    "applicationName": "dummy-service",
+    "cloudProvider": "AWS",
+    "timestamp": "2019-03-04T13:42:24Z",
+    "configurationData": {
+      "key": "value"
+    }
+  }
+}

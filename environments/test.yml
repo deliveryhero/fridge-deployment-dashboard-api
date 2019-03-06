@@ -1,0 +1,7 @@
+stage: test
+parameters:
+  node_env: dev
+  aws:
+    region: "eu-west-1"
+    dynamoDb:
+      endpoint: "http://0.0.0.0:8000"
