@@ -17,7 +17,7 @@ provider:
     STAGE: ${self:provider.stage}
     NODE_ENV: ${self:custom.env.parameters.node_env}
     DYNAMODB_ENDPOINT: ${self:custom.env.parameters.aws.dynamoDb.endpoint}
-    DEPLOYMENT_TABLE_NAME: ${self:custom.table.deployment}
+    DEPLOYMENTS_TABLE_NAME: ${self:custom.table.deployment}
 
   apiKeys:
     - ${self:service}-${self:provider.stage}-apiKey
@@ -28,6 +28,7 @@ provider:
         - "dynamodb:Get*"
         - "dynamodb:Query"
         - "dynamodb:Scan"
+        - "dynamodb:PutItem"
       Resource:
         - Fn::Join:
             - ""
@@ -39,7 +40,7 @@ provider:
 package:
   exclude:
     - .git/**
-    - test/**
+    - tests/**
     - src/**
 
 custom:
@@ -53,21 +54,19 @@ custom:
 
 functions:
   addDeployment:
-    handler: dist/httpHandler.handle
+    handler: httpHandler.handle
     events:
       - http:
-          path: /v1/deployments/
+          path: /v1/deployments
           method: post
           cors: true
-          private: true
   getDeployments:
-    handler: dist/httpHandler.handle
+    handler: httpHandler.handle
     events:
       - http:
-          path: /v1/deployments/{env}
+          path: /v1/deployments/{teamName}/{environmentName}
           method: get
           cors: true
-          private: true
 
 resources:
   Resources:
@@ -87,6 +86,6 @@ resources:
             KeyType: "HASH"
           -
             AttributeName: "SK"
-            KeyType: "HASH"
+            KeyType: "RANGE"
         BillingMode: PAY_PER_REQUEST
         TableName: "${self:custom.table.deployment}"
