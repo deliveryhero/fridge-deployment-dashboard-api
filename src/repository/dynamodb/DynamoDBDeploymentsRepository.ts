@@ -34,7 +34,6 @@ export class DynamoDBDeploymentsRepository implements IDeploymentsRepository {
         }]
       }).promise();
     } catch (e) {
-      console.log(e);
       throw new RepositoryError('Cannot add deployment');
     }
   }
