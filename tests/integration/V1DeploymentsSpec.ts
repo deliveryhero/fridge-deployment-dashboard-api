@@ -46,7 +46,7 @@ export class V1DeploymentsSpec {
   }
 
   @test
-  async 'list all environment for a team'() {
+  async 'list all environments for a team'() {
     const deploymentFixture: IDeploymentFixture = require(`./fixtures/valid/deployment-all-fields.json`);
     await this.insertDeployments(deploymentFixture);
     const actualEnvsResponse =

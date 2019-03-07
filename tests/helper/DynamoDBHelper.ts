@@ -10,7 +10,6 @@ export class DynamoDBHelper {
   private deploymentTableName: string = 'test-fridge-dda-deployment';
   private dynamoDb: AWS.DynamoDB;
 
-
   constructor() {
     this.dynamoDb = new AWS.DynamoDB({
       endpoint: this.endpoint,
@@ -126,12 +125,8 @@ export class DynamoDBHelper {
   }
 
   private async deleteTable(tableName: string): Promise<void> {
-    try {
-      await this.describeTable(tableName);
-      await this.dynamoDb.deleteTable({TableName: tableName}).promise();
-    } catch (err) {
-      return null;
-    }
+    await this.describeTable(tableName);
+    await this.dynamoDb.deleteTable({TableName: tableName}).promise();
   }
 
   private async describeTable(tableName: string): Promise<AWS.DynamoDB.Types.DescribeTableOutput> {
