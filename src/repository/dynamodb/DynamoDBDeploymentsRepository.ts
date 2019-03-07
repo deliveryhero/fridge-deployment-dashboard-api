@@ -41,10 +41,10 @@ export class DynamoDBDeploymentsRepository implements IDeploymentsRepository {
 
   async listDeployments(teamName: string, environmentName: string): Promise<Deployment[]> {
     const envs = await this.listEnvironments(teamName);
-    if (!envs || !envs.length) {
+    if (!envs || !envs.length || envs.indexOf(environmentName) === -1) {
       return [];
     }
-    const teamNameEnv = `${teamName}_${envs[0]}`;
+    const teamNameEnv = `${teamName}_${environmentName}`;
     const params: AWS.DynamoDB.Types.DocumentClient.QueryInput = {
       KeyConditionExpression: '#PK = :PK',
       ExpressionAttributeNames: {
