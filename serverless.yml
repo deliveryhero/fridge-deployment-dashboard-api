@@ -16,7 +16,7 @@ provider:
   environment:
     STAGE: ${self:provider.stage}
     NODE_ENV: ${self:custom.env.parameters.node_env}
-    DYNAMODB_ENDPOINT: ${self:custom.env.parameters.aws.dynamoDb.endpoint}
+    DYNAMO_DB_ENDPOINT: ${self:custom.env.parameters.aws.dynamoDb.endpoint}
     DEPLOYMENTS_TABLE_NAME: ${self:custom.table.deployment}
 
   apiKeys:

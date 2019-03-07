@@ -3,12 +3,13 @@ import {DocumentClient} from 'aws-sdk/lib/dynamodb/document_client';
 import {Deployment} from '../../src/model/Deployment';
 
 export class DynamoDBHelper {
+  public databaseClient: AWS.DynamoDB.DocumentClient;
   private endpoint: string = 'http://0.0.0.0:8000';
   private region: string = 'eu-west-1';
   private apiVersion: string = '2012-08-10';
   private deploymentTableName: string = 'test-fridge-dda-deployment';
   private dynamoDb: AWS.DynamoDB;
-  private databaseClient: AWS.DynamoDB.DocumentClient;
+
 
   constructor() {
     this.dynamoDb = new AWS.DynamoDB({
