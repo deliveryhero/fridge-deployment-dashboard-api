@@ -71,7 +71,6 @@ export class V1DeploymentsSpec {
   }
 
   private async getResponse<T>(path: string): Promise<T> {
-    console.log(`${this.ENDPOINT}/${path}`)
     const response = await this.httpClient.get<T>(`${this.ENDPOINT}/${path}`);
     return response.data;
   }
