@@ -1,0 +1,8 @@
+stage: prod
+parameters:
+  node_env: production
+  aws:
+    region: "eu-west-1"
+    accountId: "984138409301"
+    dynamoDb:
+      endpoint: "http://dynamodb.eu-west-1.amazonaws.com"
