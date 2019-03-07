@@ -23,7 +23,7 @@ export class DynamoDBHelper {
     });
   }
 
-  async createSalesforceTable(): Promise<void> {
+  async createDeploymentTable(): Promise<void> {
     const readCapacityUnits = 1;
     const writeCapacityUnits = 1;
     const params = {
@@ -47,7 +47,7 @@ export class DynamoDBHelper {
     return this.createTable(params, this.deploymentTableName);
   }
 
-  async deleteSalesforceTable(): Promise<void> {
+  async deleteDeploymentTable(): Promise<void> {
     return await this.deleteTable(this.deploymentTableName);
   }
 

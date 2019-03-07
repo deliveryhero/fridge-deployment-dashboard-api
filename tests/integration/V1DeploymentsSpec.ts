@@ -22,8 +22,8 @@ export class V1DeploymentsSpec {
   }
 
   async before() {
-    await this.dynamoDBHelper.deleteSalesforceTable();
-    await this.dynamoDBHelper.createSalesforceTable();
+    await this.dynamoDBHelper.deleteDeploymentTable();
+    await this.dynamoDBHelper.createDeploymentTable();
   }
 
   @test
