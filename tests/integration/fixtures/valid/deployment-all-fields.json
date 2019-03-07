@@ -1,0 +1,61 @@
+{
+  "deployment": {
+    "teamName": "data-fridge",
+    "releaseTag": "release-V1.2.3",
+    "environment": "staging",
+    "region": "eu-west-1",
+    "applicationName": "dummy-service",
+    "cloudProvider": "AWS",
+    "timestamp": "2019-03-04T13:42:24Z",
+    "configurationData": {
+      "key": "value"
+    }
+  },
+  "expectedDeployments": [
+    {
+      "SK": "2019-03-04T13:42:24Z",
+      "PK": "data-fridge_staging",
+      "deployment": {
+        "teamName": "data-fridge",
+        "releaseTag": "release-V1.2.3",
+        "environment": "staging",
+        "configurationData": {
+          "key": "value"
+        },
+        "cloudProvider": "AWS",
+        "region": "eu-west-1",
+        "applicationName": "dummy-service",
+        "timestamp": "2019-03-04T13:42:24Z"
+      }
+    }
+  ],
+  "expectedEnvs": [
+    {
+      "SK": "staging",
+      "PK": "data-fridge"
+    }
+  ],
+  "expectedListEnvsResponse": {
+    "environments": [
+      {
+        "environment_name": "staging"
+      }
+    ]
+  },
+  "expectedListDeploymentsResponse": {
+    "dummy-service": [
+      {
+        "teamName": "data-fridge",
+        "releaseTag": "release-V1.2.3",
+        "environment": "staging",
+        "configurationData": {
+          "key": "value"
+        },
+        "cloudProvider": "AWS",
+        "region": "eu-west-1",
+        "applicationName": "dummy-service",
+        "timestamp": "2019-03-04T13:42:24Z"
+      }
+    ]
+  }
+}

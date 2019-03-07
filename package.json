@@ -9,15 +9,17 @@
     "prepare": "yarn self-peers && yarn tsc",
     "self-peers": "install-self-peers -- --ignore-scripts",
     "generate-api-doc": "yarn tsc && node_modules/.bin/swaggerGen -c ./swaggerConfig.json",
-    "test": "yarn prepare && yarn test-tslint && yarn test-unit",
+    "test": "yarn prepare && yarn test-tslint && yarn test-unit && yarn test-integration ",
     "test-tslint": "tslint -c ./tslint.json $(find . -type f -name '*.ts' -not -name '*.d.ts' -not -path './node_modules/*')",
-    "test-unit": "ENVIRONMENT=test yarn mocha --opts tests/mocha.opts \"./tests/unit/**/*Spec.js\""
+    "test-unit": "ENVIRONMENT=test yarn mocha --opts tests/mocha.opts \"./tests/unit/**/*Spec.js\"",
+    "test-integration": "AWS_XRAY_CONTEXT_MISSING=LOG_ERROR ENVIRONMENT=test yarn serverless offline -c --dontPrintOutput --environment=environments/test.yml start --exec='yarn mocha --opts tests/mocha.opts ./tests/integration/**/*.js'"
   },
   "dependencies": {
     "@nestjs/common": "^5.4.0",
     "@nestjs/core": "^5.4.0",
     "aws-sdk": "^2.413.0",
     "aws-serverless-express": "^3.3.5",
+    "axios": "^0.18.0",
     "class-transformer": "^0.2.0",
     "class-validator": "^0.9.1",
     "reflect-metadata": "^0.1.12",

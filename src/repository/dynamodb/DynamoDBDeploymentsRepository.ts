@@ -14,7 +14,7 @@ export class DynamoDBDeploymentsRepository implements IDeploymentsRepository {
 
   async addDeployment(deployment: Deployment): Promise<void> {
     try {
-      await this.dbDocumentClient.transactWrite({
+     await this.dbDocumentClient.transactWrite({
         TransactItems: [{
           Put: {
             TableName: this.config.aws.dynamoDB.tables.deployments.tableName,
