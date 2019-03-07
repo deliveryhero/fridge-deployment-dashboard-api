@@ -8,7 +8,10 @@ import * as AWS from 'aws-sdk';
 @Module({
   controllers: [DeploymentsController],
   providers: [
-    DynamoDBDeploymentsRepository,
+    {
+      provide: 'IDeploymentsRepository',
+      useClass: DynamoDBDeploymentsRepository
+    },
     {
       provide: ApplicationConfig,
       useValue: config,

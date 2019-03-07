@@ -11,7 +11,6 @@ export class ApplicationConfig implements IApplicationConfig {
 
 export interface IAwsConfig {
     region: string;
-    accountId: string;
     dynamoDB: {
         endpoint: string;
         tables: {
